@@ -1,0 +1,24 @@
+@startuml
+!include <C4/C4_Container>
+
+title Diagrama De Contexto
+
+Person(Empleado, "Empleado", "Persona a capacitarse")
+Person(Admin, "Admin", "Crea capacitaciones y define nuevas categorias")
+System(web_capacitate, "Sitio web CAPACITATE", "Brinda capacitaciones a Clientes/Empresas")
+Person(Empresa, "Empresa", "Dirige a sus empleados a capacitarse")
+
+
+
+System_Ext(email_system, "E-Mail System", "Recordatorio y fecha limite de su capacitacion")
+
+Rel(Empresa, web_capacitate, "Consultar ofertas y asignar capacitaciones")
+Rel(Empresa, web_capacitate, "Ver progreso de sus empleados")
+Rel(Empleado, web_capacitate, "Completar Cuestionario")
+
+
+Rel_Back(web_capacitate, Admin, "")
+Rel_Back(Empleado, email_system, "Enviar")
+Rel_Back(email_system,web_capacitate,"")
+
+@enduml
