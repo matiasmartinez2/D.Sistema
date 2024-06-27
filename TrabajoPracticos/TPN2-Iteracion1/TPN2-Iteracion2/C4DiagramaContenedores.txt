@@ -1,0 +1,27 @@
+@startuml
+!include <C4/C4_Container>
+
+title Diagrama de Contenedores - CAPACITATE
+
+Person(Empleado, "Empleado", "Persona a capacitarse")
+Person(Admin, "Admin", "Crea capacitaciones y define nuevas categorías")
+Person(Empresa, "Empresa", "Dirige a sus empleados a capacitarse")
+
+System_Boundary(capacitate, "CAPACITATE") {
+    Container(WebApp, "Frontend Web", "HTML,CSS", "Proporciona la interfaz de usuario")
+    Container(API, "Backend", "JAVA", "")
+    ContainerDb(Database, "Base de Datos", "MySQL o Sql", "Almacena datos de usuarios, capacitaciones y progreso")
+    Container(EmailService, "Servicios de Notificación","", "Envía correos electrónicos y recordatorios")
+}
+
+Rel(Empresa, WebApp, "Consultar ofertas y asignar capacitaciones")
+Rel(Empresa, WebApp, "Ver progreso de sus empleados")
+Rel(Empleado, WebApp, "Completar Cuestionario")
+Rel(EmailService, Empleado, "Recibir notificaciones")
+
+Rel(Admin, API, "Gestionar capacitaciones y categorías")
+Rel(WebApp, API, "")
+Rel(API, Database, "")
+Rel(API, EmailService, "Solicitar envío de notificaciones")
+
+@enduml
